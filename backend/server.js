@@ -6,6 +6,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 // bring routes
+const userRoutes = require('./routes/user');
+
 // app
 const app = express();
 
@@ -26,9 +28,9 @@ if (process.env.NODE_ENV === 'development') {
     app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 }
 // routes middleware
-
+app.use('/api', userRoutes);
 // port
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
