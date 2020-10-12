@@ -28,3 +28,29 @@ exports.register = (req, res) => {
         })
     })
 }
+
+exports.loginIn = (req, res) => {
+    const { email, password } = req.body;
+
+    User.findOne({email}).exec((err, user) => {
+        if (err || !user) {
+            return res.status(400).json({
+                error:'User Does not exist'
+            })
+        }
+
+        if (!user.authenticate(password)) {
+            return res.status(400).json({
+                error: 'Email and Password did not matched'
+            })
+        }
+
+        const token = jwt.sign({_id:user._id}, process.env.JWT_SECRET, {expiresIn: '1d'})
+
+        res.cookie('token', token, {expiresIn: '1d'})
+        const {_id, username, name, email, role} = user
+        return res.json({
+            token, user: {_id, username, name, email, role}
+        })
+    })
+}
