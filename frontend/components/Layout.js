@@ -1,12 +1,12 @@
-import Header from './Header'
+import Header from './Header';
 
 const Layout = ({ children }) => {
-    return(
+    return (
         <React.Fragment>
-            <Header/>
-                {children}
+            <Header />
+            {children}
         </React.Fragment>
     );
 };
 
-export default Layout
+export default Layout;
