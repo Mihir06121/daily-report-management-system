@@ -1,7 +1,7 @@
 import Layout from '../components/Layout';
 import LoginComponent from '../components/auth/LogInComponent';
 
-const Signin = () => {
+const Login = () => {
     return (
         <Layout>
             <div className="row  d-flex justify-content-center">
@@ -14,4 +14,4 @@ const Signin = () => {
     );
 };
 
-export default Signin;
+export default Login;

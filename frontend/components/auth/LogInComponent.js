@@ -3,14 +3,14 @@ import { login, authenticate, isAuth } from '../../actions/auth';
 import Router from 'next/router';
 
 
-const SigninComponent = () => {
+const LoginComponent = () => {
     const [values, setValues] = useState({
         email: '',
         password: '',
         error: '',
         loading: false,
         message: '',
-        showForm: true
+        showForm: true,
     });
 
     const { email, password, error, loading, message, showForm } = values;
@@ -21,7 +21,6 @@ const SigninComponent = () => {
 
     const submitHandler = event => {
         event.preventDefault();
-        // console.table({ name, email, password, error, loading, message, showForm });
         setValues({ ...values, loading: true, error: false });
         const user = { email, password };
 
@@ -29,12 +28,10 @@ const SigninComponent = () => {
             if (data.error) {
                 setValues({ ...values, error: data.error, loading: false });
             } else {
-                // save user token to cookie
-                // save user info to localstorage
-                // authenticate user
                 authenticate(data, () => {
                     if (isAuth() && isAuth().role === 1) {
                         Router.push(`/admin`);
+                        console.log('login succesfull')
                     } else {
                         Router.push(`/user`);
                     }
@@ -46,11 +43,8 @@ const SigninComponent = () => {
     const changeHandler = name => event => {
         setValues({ ...values, error: false, [name]: event.target.value });
     };
-
-    const showLoading = () => (loading ? <div className="alert alert-info">Loading...</div> : '');
-    const showError = () => (error ? <div className="alert alert-danger">{error}</div> : '');
-    const showMessage = () => (message ? <div className="alert alert-info">{message}</div> : '');
-
+      
+    
     const loginForm = () => {
         return (
             <form onSubmit={submitHandler}>
@@ -79,7 +73,13 @@ const SigninComponent = () => {
                 </div>
             </form>
         );
+
+        
     };
+
+    const showLoading = () => (loading ? <div className="alert alert-info">Loading...</div> : '');
+    const showError = () => (error ? <div className="alert alert-danger">{error}</div> : '');
+    const showMessage = () => (message ? <div className="alert alert-info">{message}</div> : '');
 
     return (
         <React.Fragment>
@@ -91,4 +91,4 @@ const SigninComponent = () => {
     );
 };
 
-export default SigninComponent;
+export default LoginComponent;

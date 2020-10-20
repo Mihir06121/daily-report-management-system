@@ -21,7 +21,6 @@ const RegisterComponent = () => {
 
     const submitHandler = e => {
         e.preventDefault();
-        // console.table({ name, email, password, error, loading, message, showForm });
         setValues({ ...values, loading: true, error: false });
         const user = { name, email, password };
 
@@ -43,10 +42,9 @@ const RegisterComponent = () => {
         });
     };
 
-    const changeHandler = name => e => {
-        setValues({ ...values, error: false, [name]: e.target.value });
+    const changeHandler = email => e => {
+        setValues({ ...values, error: false, [email]: e.target.value });
     };
-
     
     const registerForm = () => {
         return (

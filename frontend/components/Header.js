@@ -24,11 +24,17 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
+  let tempDate = new Date();
+  const date = tempDate.getDate() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getFullYear() ;
+
   return (
     <div>
       <Navbar color="light" light expand="md">
         <Link href="/">
           <NavLink style={{ cursor: 'pointer' }} className="font-weight-bold">{APP_NAME}</NavLink>
+        </Link>
+        <Link href="/" className="mr-auto">
+          <NavLink style={{ cursor: 'pointer' }}>{date}</NavLink>
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -46,6 +52,22 @@ const Header = () => {
                   </Link>
                 </NavItem>
               </React.Fragment>
+            )}
+
+            {isAuth() && isAuth().role === 0 && (
+              <NavItem>
+                <Link href="/user">
+                  <NavLink style={{ cursor: 'pointer' }}>{`${isAuth().name}'s Dashboard`}</NavLink>
+                </Link>
+              </NavItem>
+            )}
+
+            {isAuth() && isAuth().role === 1 && (
+              <NavItem>
+                <Link href="/admin">
+                  <NavLink style={{ cursor: 'pointer' }}>{`${isAuth().name}'s Dashboard`}</NavLink>
+                </Link>
+              </NavItem>
             )}
 
             {isAuth() && (
