@@ -73,7 +73,6 @@ const Report = () => {
 
     const clickSubmit = e => {
         e.preventDefault();
-        // console.log('create category', name);
         create({ 
             subject1,
             sub_1_Present,
