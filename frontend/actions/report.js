@@ -15,3 +15,10 @@ export const create = (report, token) => {
     }).catch(err => console.log(err));
 };
 
+export const getReport = () => {
+    return fetch(`${API}/reports`, {
+        method: 'GET'
+    }).then(response => {
+        return response.json();
+    }).catch(err => console.log(err))
+}

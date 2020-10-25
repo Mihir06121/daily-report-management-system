@@ -2,7 +2,7 @@ import{ useState, useEffect } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { getCookie } from '../../actions/auth';
-import { create } from '../../actions/report';
+import { create, getReport } from '../../actions/report';
 
 const Report = () => {
     const [values, setValues] = useState({
@@ -47,29 +47,31 @@ const Report = () => {
         sub_4_Absent,
         sub_4_Total,
         reports,
+        success,
+        error,
         removed,
         reload
     } = values
     
     const token = getCookie('token');
 
-    // useEffect(() => {
-    //     loadReport();
-    // },[reload])
+    useEffect(() => {
+        loadReport();
+    },[reload])
 
-    // const loadReport =() => {
-    //     getReport().then(data=> {
-    //         if (data.error) {
-    //             console.log(data.error);
-    //         } else {
-    //             setValues({...values, reports:data});
-    //         }
-    //     });
-    // };
+    const loadReport =() => {
+        getReport().then(data=> {
+            if (data.error) {
+                console.log(data.error);
+            } else {
+                setValues({...values, reports:data});
+            }
+        });
+    };
 
-    // const showReports = () => {
+    const showReports = () => {
 
-    // } 
+    } 
 
     const clickSubmit = e => {
         e.preventDefault();
@@ -121,6 +123,18 @@ const Report = () => {
             error: false, success: false, removed: '' });
     };
 
+    const showSuccess = () => {
+        if (success) {
+            return <p className="text-success">Category is created</p>;
+        }
+    };
+
+    const showError = () => {
+        if (error) {
+            return <p className="text-danger">Category already exist</p>;
+        }
+    };
+
     return(
         <React.Fragment>
             <h1>Report From</h1>
@@ -129,10 +143,17 @@ const Report = () => {
                     <div className="row">
                         <div className="col-md">
                             <label className="text-muted">Subject 1</label>
-                            <input type="text" className="form-control" 
+                            <select className="custom-select form-control" id="inputGroupSelect01"
                             onChange={handleChange('subject1')} 
                             value={subject1} 
-                            required />
+                            required >
+                                <option selected>None</option>
+                                <option value="DBMS">DBMS</option>
+                                <option value="DS">DS</option>
+                                <option value="AM">AM</option>
+                                <option value="CN">CN</option>
+                                <option value="PP">PP</option>
+                            </select>
                         </div>
                         <div className="col-md">
                             <label className="text-muted">Present</label>
@@ -160,10 +181,17 @@ const Report = () => {
                     <div className="row">
                         <div className="col-md">
                             <label className="text-muted">Subject 2</label>
-                            <input type="text" className="form-control" 
-                            onChange={handleChange ('subject2')} 
+                            <select className="custom-select form-control" id="inputGroupSelect01"
+                            onChange={handleChange('subject2')} 
                             value={subject2} 
-                            required />
+                            required >
+                                <option selected>None</option>
+                                <option value="DBMS">DBMS</option>
+                                <option value="DS">DS</option>
+                                <option value="AM">AM</option>
+                                <option value="CN">CN</option>
+                                <option value="PP">PP</option>
+                            </select>
                         </div>
                         <div className="col-md">
                             <label className="text-muted">Present</label>
@@ -193,10 +221,17 @@ const Report = () => {
                     <div className="row">
                         <div className="col-md">
                             <label className="text-muted">Subject 3</label>
-                            <input type="text" className="form-control" 
+                            <select className="custom-select form-control" id="inputGroupSelect01"
                             onChange={handleChange('subject3')} 
                             value={subject3} 
-                            required />
+                            required >
+                                <option selected>None</option>
+                                <option value="DBMS">DBMS</option>
+                                <option value="DS">DS</option>
+                                <option value="AM">AM</option>
+                                <option value="CN">CN</option>
+                                <option value="PP">PP</option>
+                            </select>
                         </div>
                         <div className="col-md">
                             <label className="text-muted">Present</label>
@@ -224,10 +259,17 @@ const Report = () => {
                     <div className="row">
                         <div className="col-md">
                             <label className="text-muted">Subject 4</label>
-                            <input type="text" className="form-control" 
+                            <select className="custom-select form-control" id="inputGroupSelect01"
                             onChange={handleChange('subject4')} 
                             value={subject4} 
-                            required />
+                            required >
+                                <option selected>None</option>
+                                <option value="DBMS">DBMS</option>
+                                <option value="DS">DS</option>
+                                <option value="AM">AM</option>
+                                <option value="CN">CN</option>
+                                <option value="PP">PP</option>
+                            </select>
                         </div>
                         <div className="col-md">
                             <label className="text-muted">Present</label>
@@ -258,6 +300,8 @@ const Report = () => {
                 </button>
             </div>
             </form>
+                {showSuccess()}
+                {showError()}
         </React.Fragment>
     )
 }
