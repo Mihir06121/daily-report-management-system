@@ -1,30 +1,27 @@
 import{ useState, useEffect } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
 import { getCookie } from '../../actions/auth';
 import { create, getReport } from '../../actions/report';
 
 const Report = () => {
     const [values, setValues] = useState({
         subject1: '',
-        sub_1_Present: '',
-        sub_1_Absent: '',
-        sub_1_Total: '',
+        sub_1_Present: '0',
+        sub_1_Absent: '0',
+        sub_1_Total: '0',
         subject2: '',
-        sub_2_Present: '',
-        sub_2_Absent: '',
-        sub_2_Total: '',
+        sub_2_Present: '0',
+        sub_2_Absent: '0',
+        sub_2_Total: '0',
         subject3: '',
-        sub_3_Present: '',
-        sub_3_Absent: '',
-        sub_3_Total: '',
+        sub_3_Present: '0',
+        sub_3_Absent: '0',
+        sub_3_Total: '0',
         subject4: '',
-        sub_4_Present: '',
-        sub_4_Absent: '',
-        sub_4_Total: '',
+        sub_4_Present: '0',
+        sub_4_Absent: '0',
+        sub_4_Total: '0',
         error: false,
         success: false,
-        reports: [],
         removed: false,
         reload: false
     });
@@ -46,7 +43,6 @@ const Report = () => {
         sub_4_Present,
         sub_4_Absent,
         sub_4_Total,
-        reports,
         success,
         error,
         removed,
@@ -68,10 +64,6 @@ const Report = () => {
             }
         });
     };
-
-    const showReports = () => {
-
-    } 
 
     const clickSubmit = e => {
         e.preventDefault();
@@ -96,7 +88,7 @@ const Report = () => {
             if (data.error) {
                 setValues({ ...values, error: data.error, success: false });
             } else {
-                setValues({ ...values, error: false, success: false, 
+                setValues({ ...values, error: false, success: true, 
                     subject1: '',
                     sub_1_Present: '',
                     sub_1_Absent: '',
@@ -114,25 +106,31 @@ const Report = () => {
                     sub_4_Absent: '',
                     sub_4_Total: '', 
                     removed: !removed, reload: !reload });
+                    console.log('report Submitted successfully')
             }
         });
     };
 
-    const handleChange = name => e => {
-        setValues({ ...values, [name]:e.target.value,
+    const handleChange = name => event => {
+        setValues({ ...values, [name]:event.target.value,
             error: false, success: false, removed: '' });
     };
 
     const showSuccess = () => {
         if (success) {
-            return <p className="text-success">Category is created</p>;
+            return <p className="text-success bg-primary">Report is created</p>;
         }
     };
 
     const showError = () => {
         if (error) {
-            return <p className="text-danger">Category already exist</p>;
+            return <p className="text-white bg-danger">SomeThing went wromg<br/>
+            Check if any entry is missing</p>;
         }
+    };
+
+    const mouseMoveHandler = event => {
+        setValues({ ...values, error: false, success: false, removed: '' });
     };
 
     return(
@@ -147,12 +145,13 @@ const Report = () => {
                             onChange={handleChange('subject1')} 
                             value={subject1} 
                             required >
-                                <option selected>None</option>
+                                <option defaultValue>Select-One</option>
                                 <option value="DBMS">DBMS</option>
                                 <option value="DS">DS</option>
                                 <option value="AM">AM</option>
                                 <option value="CN">CN</option>
                                 <option value="PP">PP</option>
+                                <option value="No-Lectures">No-Lect</option>
                             </select>
                         </div>
                         <div className="col-md">
@@ -185,12 +184,13 @@ const Report = () => {
                             onChange={handleChange('subject2')} 
                             value={subject2} 
                             required >
-                                <option selected>None</option>
+                                <option defaultValue>Select-One</option>
                                 <option value="DBMS">DBMS</option>
                                 <option value="DS">DS</option>
                                 <option value="AM">AM</option>
                                 <option value="CN">CN</option>
                                 <option value="PP">PP</option>
+                                <option value="No-Lectures">No-Lect</option>
                             </select>
                         </div>
                         <div className="col-md">
@@ -225,12 +225,13 @@ const Report = () => {
                             onChange={handleChange('subject3')} 
                             value={subject3} 
                             required >
-                                <option selected>None</option>
+                                <option defaultValue>Select-One</option>
                                 <option value="DBMS">DBMS</option>
                                 <option value="DS">DS</option>
                                 <option value="AM">AM</option>
                                 <option value="CN">CN</option>
                                 <option value="PP">PP</option>
+                                <option value="No-Lectures">No-Lect</option>
                             </select>
                         </div>
                         <div className="col-md">
@@ -263,12 +264,13 @@ const Report = () => {
                             onChange={handleChange('subject4')} 
                             value={subject4} 
                             required >
-                                <option selected>None</option>
+                                <option defaultValue>Select-One</option>
                                 <option value="DBMS">DBMS</option>
                                 <option value="DS">DS</option>
                                 <option value="AM">AM</option>
                                 <option value="CN">CN</option>
                                 <option value="PP">PP</option>
+                                <option value="No-Lectures">No-Lect</option>
                             </select>
                         </div>
                         <div className="col-md">
@@ -300,8 +302,12 @@ const Report = () => {
                 </button>
             </div>
             </form>
+            <div onMouseMove={mouseMoveHandler}>
+            <div className="text-center">
                 {showSuccess()}
                 {showError()}
+            </div>
+            </div>
         </React.Fragment>
     )
 }

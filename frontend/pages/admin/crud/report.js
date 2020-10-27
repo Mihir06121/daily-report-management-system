@@ -1,7 +1,6 @@
 import Layout from '../../../components/Layout';
 import Admin from '../../../components/auth/Admin';
 import Report from '../../../components/crud/Report';
-import Link from 'next/link';
 
 const createReport = () => {
     return(
