@@ -51,19 +51,19 @@ const Report = () => {
     
     const token = getCookie('token');
 
-    useEffect(() => {
-        loadReport();
-    },[reload])
+    // useEffect(() => {
+    //     loadReport();
+    // },[reload])
 
-    const loadReport =() => {
-        getReport().then(data=> {
-            if (data.error) {
-                console.log(data.error);
-            } else {
-                setValues({...values, reports:data});
-            }
-        });
-    };
+    // const loadReport =() => {
+    //     getReport().then(data=> {
+    //         if (data.error) {
+    //             console.log(data.error);
+    //         } else {
+    //             setValues({...values, reports:data});
+    //         }
+    //     });
+    // };
 
     const clickSubmit = e => {
         e.preventDefault();
@@ -118,7 +118,7 @@ const Report = () => {
 
     const showSuccess = () => {
         if (success) {
-            return <p className="text-success bg-primary">Report is created</p>;
+            return <p className="text-white bg-primary">Report is created</p>;
         }
     };
 
@@ -164,7 +164,7 @@ const Report = () => {
                         <div className="col-md">
                             <label className="text-muted">Absent</label>
                             <input type="number" className="form-control" 
-                            onChange={handleChange('sub_1_Absent')} 
+                            onChange={handleChange('sub_1_Absent')}
                             value={sub_1_Absent} 
                             required />
                         </div>

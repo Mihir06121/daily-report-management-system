@@ -15,9 +15,9 @@ export const create = (report, token) => {
     }).catch(err => console.log(err));
 };
 
-export const getReport = () => {
-    return fetch(`${API}/reports`, {
-        method: 'GET'
+export const getReports = () => {
+    return fetch(`${API}/list-reports`, {
+        method: 'GET',
     }).then(response => {
         return response.json();
     }).catch(err => console.log(err))

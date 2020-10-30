@@ -73,7 +73,9 @@ const reportSchema = new mongoose.Schema({
         type: String,
     }
 },
-    { timestamp: true }
+    { timestamps: true,
+        type: Date, 
+        default: Date.now}
 );
 
 module.exports = mongoose.model('Report', reportSchema);

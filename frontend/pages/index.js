@@ -1,6 +1,6 @@
 import Layout from '../components/Layout'
 import Link from 'next/link';
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 const Index = () => {
     return (

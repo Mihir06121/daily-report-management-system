@@ -77,6 +77,9 @@ const Header = () => {
                 </NavLink>
               </NavItem>
             )}
+            <Link href="/list-reports">
+              <NavLink style={{ cursor: 'pointer' }}>reports</NavLink>
+            </Link>
           </Nav>
         </Collapse>
       </Navbar>
