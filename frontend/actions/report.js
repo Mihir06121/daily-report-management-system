@@ -16,7 +16,7 @@ export const create = (report, token) => {
 };
 
 export const getReports = () => {
-    return fetch(`${API}/list-reports`, {
+    return fetch(`${API}/reports`, {
         method: 'GET',
     }).then(response => {
         return response.json();

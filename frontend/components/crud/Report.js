@@ -1,6 +1,7 @@
 import{ useState, useEffect } from 'react';
 import { getCookie } from '../../actions/auth';
-import { create, getReport } from '../../actions/report';
+import { create } from '../../actions/report';
+import {  isAuth } from '../../actions/auth';
 
 const Report = () => {
     const [values, setValues] = useState({
@@ -20,6 +21,7 @@ const Report = () => {
         sub_4_Present: '0',
         sub_4_Absent: '0',
         sub_4_Total: '0',
+        prof_name:'',
         error: false,
         success: false,
         removed: false,
@@ -43,6 +45,7 @@ const Report = () => {
         sub_4_Present,
         sub_4_Absent,
         sub_4_Total,
+        prof_name,
         success,
         error,
         removed,
@@ -50,20 +53,6 @@ const Report = () => {
     } = values
     
     const token = getCookie('token');
-
-    // useEffect(() => {
-    //     loadReport();
-    // },[reload])
-
-    // const loadReport =() => {
-    //     getReport().then(data=> {
-    //         if (data.error) {
-    //             console.log(data.error);
-    //         } else {
-    //             setValues({...values, reports:data});
-    //         }
-    //     });
-    // };
 
     const clickSubmit = e => {
         e.preventDefault();
@@ -84,6 +73,7 @@ const Report = () => {
             sub_4_Present,
             sub_4_Absent,
             sub_4_Total,
+            prof_name: isAuth().name,
          }, token).then(data => {
             if (data.error) {
                 setValues({ ...values, error: data.error, success: false });
@@ -105,6 +95,7 @@ const Report = () => {
                     sub_4_Present: '',
                     sub_4_Absent: '',
                     sub_4_Total: '', 
+                    prof_name: '',
                     removed: !removed, reload: !reload });
                     console.log('report Submitted successfully')
             }
@@ -295,7 +286,15 @@ const Report = () => {
                             required />
                         </div>
                     </div>
-                </div>
+                </div><br/>
+                {/* <div className="col-md">
+                    <label className="text-muted">Prof Name</label>
+                    <input type="text" className="form-control" 
+                    placeholder=''
+                    onChange={handleChange('prof_name')} 
+                    value={prof_name} 
+                    />
+                </div> */}
                 <div className="text-center pt-5 pb-5">
                 <button type="submit" className="btn btn-primary">
                     Submit
@@ -306,7 +305,11 @@ const Report = () => {
             <div className="text-center">
                 {showSuccess()}
                 {showError()}
+                
             </div>
+            </div>
+            <div>
+                {/* {showReports()} */}
             </div>
         </React.Fragment>
     )

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const reportSchema = new mongoose.Schema({
     subject1: {
@@ -71,6 +72,7 @@ const reportSchema = new mongoose.Schema({
     
     prof_name: {
         type: String,
+        required: true,
     }
 },
     { timestamps: true,

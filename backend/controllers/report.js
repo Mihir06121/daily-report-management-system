@@ -18,6 +18,7 @@ exports.create = (req, res) => {
         sub_4_Present,
         sub_4_Absent,
         sub_4_Total,
+        prof_name
     } = req.body;
 
     let report = new Report({
@@ -37,6 +38,7 @@ exports.create = (req, res) => {
         sub_4_Present,
         sub_4_Absent,
         sub_4_Total,
+        prof_name,
     })
 
     report.save((err, data) => {
