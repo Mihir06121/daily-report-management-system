@@ -64,7 +64,7 @@ const Header = () => {
 
             {isAuth() && isAuth().role === 1 && (
               <NavItem>
-                <Link href="/admin">
+                <Link href="/faculty">
                   <NavLink style={{ cursor: 'pointer' }}>{`${isAuth().name}'s Dashboard`}</NavLink>
                 </Link>
               </NavItem>
@@ -77,9 +77,16 @@ const Header = () => {
                 </NavLink>
               </NavItem>
             )}
-            <Link href="/list-reports">
-              <NavLink style={{ cursor: 'pointer' }}>reports</NavLink>
+            {isAuth()&&  isAuth().role === 1 &&(
+              <Link href="/list-reports">
+                <NavLink style={{ cursor: 'pointer' }}>Reports</NavLink>
+              </Link>
+            )}
+            {isAuth()&&  isAuth().role === 0 &&(
+            <Link href="/list-all-reports">
+              <NavLink style={{ cursor: 'pointer' }}>All-Reports</NavLink>
             </Link>
+            )}
           </Nav>
         </Collapse>
       </Navbar>

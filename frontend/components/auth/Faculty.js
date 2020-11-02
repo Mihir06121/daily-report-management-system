@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Router from 'next/router';
 import { isAuth } from '../../actions/auth';
 
-const Admin = ({ children }) => {
+const Faculty = ({ children }) => {
     useEffect(() => {
         if (!isAuth()) {
             Router.push(`/login`);
@@ -14,4 +14,4 @@ const Admin = ({ children }) => {
     return <React.Fragment>{children}</React.Fragment>;
 };
 
-export default Admin
+export default Faculty

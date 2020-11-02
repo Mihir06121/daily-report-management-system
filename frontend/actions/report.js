@@ -22,3 +22,16 @@ export const getReports = () => {
         return response.json();
     }).catch(err => console.log(err))
 }
+
+export const removeReport = (_id, token) => {
+    return fetch(`${API}/report/${_id}`, {
+        method: 'DELETE',
+        header: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => console.log(err))
+} 

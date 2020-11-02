@@ -30,7 +30,7 @@ const LoginComponent = () => {
             } else {
                 authenticate(data, () => {
                     if (isAuth() && isAuth().role === 1) {
-                        Router.push(`/admin`);
+                        Router.push(`/faculty`);
                         console.log('login succesfull')
                     } else {
                         Router.push(`/user`);

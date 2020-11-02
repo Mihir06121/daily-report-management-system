@@ -53,7 +53,7 @@ exports.create = (req, res) => {
 }
 
 exports.list = (req, res) => {
-    Report.find({}).exec((err, data) => {
+    Report.find({}).sort({ createdAt: -1 }).exec((err, data) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)

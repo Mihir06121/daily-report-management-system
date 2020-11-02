@@ -1,11 +1,11 @@
 import Layout from '../../../components/Layout';
-import Admin from '../../../components/auth/Admin';
+import Faculty from '../../../components/auth/Faculty';
 import Report from '../../../components/crud/Report';
 
 const createReport = () => {
     return(
         <Layout>
-            <Admin>
+            <Faculty>
                 <div className="conatiner-fluid">
                     <div className="row">
                         <div className="col-md-12 pt-5 pb-5">
@@ -13,7 +13,7 @@ const createReport = () => {
                         </div>
                     </div>
                 </div>
-            </Admin>
+            </Faculty>
         </Layout>
     )
 }

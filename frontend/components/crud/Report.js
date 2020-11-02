@@ -59,7 +59,7 @@ const Report = () => {
         create({ 
             subject1,
             sub_1_Present,
-            sub_1_Absent,
+            sub_1_Absent: sub_1_Total - sub_1_Present,
             sub_1_Total,
             subject2,
             sub_2_Present,
