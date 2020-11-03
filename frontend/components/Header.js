@@ -78,12 +78,12 @@ const Header = () => {
               </NavItem>
             )}
             {isAuth()&&  isAuth().role === 1 &&(
-              <Link href="/list-reports">
+              <Link href="/report">
                 <NavLink style={{ cursor: 'pointer' }}>Reports</NavLink>
               </Link>
             )}
             {isAuth()&&  isAuth().role === 0 &&(
-            <Link href="/list-all-reports">
+            <Link href="/report">
               <NavLink style={{ cursor: 'pointer' }}>All-Reports</NavLink>
             </Link>
             )}
