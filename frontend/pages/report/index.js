@@ -1,21 +1,16 @@
 import Layout from '../../components/Layout'
+import Link from 'next/link';
+import Router from 'next/router';
 import { getReports, removeReport } from '../../actions/report'
-import { getCookie, isAuth } from '../../actions/auth';
+import {  isAuth } from '../../actions/auth';
 import{ useState, useEffect } from 'react';
 import Faculty from '../../components/auth/Faculty'
 import moment from 'moment';
 
 const listReports = () => {
 
-        const [values, setValues] = useState({
-            reports:[],
-        });
-    
-        const {
-            reports,
-        } = values
+        const [reports, setReports] = useState([]);
         
-        const token = getCookie('token');
     
         useEffect(() => {
             loadReport();
@@ -26,18 +21,17 @@ const listReports = () => {
                 if (data.error) {
                     console.log(data.error);
                 } else {
-                    setValues({...values, reports:data});
+                    setReports(data);
                 }
             });
         };
 
         const deleteReport = _id => {
-            removeReport(_id, token).then(data => {
+            removeReport(_id).then(data => {
                 if (data.error) {
                     console.log(data.error);
                 } else {
                     loadReport();
-                    setValues({...values, reports:data});
                 }
             });
         };
@@ -51,8 +45,11 @@ const listReports = () => {
     
         const displayReports = () => {
             return reports.map((r, i) => {
-
-                if(r.prof_name == isAuth().name){
+                if(!isAuth()){
+                    Router.push(`/login`);
+                } else if(isAuth().role === 0) {
+                    Router.push(`/user`);
+                } else if(isAuth().name == r.prof_name) {
                     return(
                         <div className="text-black text-center" key={i}>
                             <div className="row text-center">
@@ -60,10 +57,12 @@ const listReports = () => {
                                     { r.prof_name }
                                 </div>
                                 <div className="col">
-                                    {moment(r.updatedAt).format("DD/MM/YY")}
+                                    {moment(r.updatedAt).format("DD/MM/YY")} | {moment (r.updatedAt).fromNow()}
                                 </div>
                             </div>
-                                <table className="container border text-center">
+                            {JSON.stringify(r._id)}
+                            {JSON.stringify(r.createdAt)}
+                            <table className="container border text-center">
                                 <thead>
                                     <tr className="row">
                                         <th className="col">
@@ -146,7 +145,7 @@ const listReports = () => {
                                 </tbody>
                             </table>
                             <br/>
-                            <button className="btn btn-sm btn-outline-danger" onClick={() => deleteConfirm(r._id)}>
+                            <button className="btn btn-outline-danger" onClick={() => deleteConfirm(r._id)}>
                                 Delete
                             </button>
                             <hr/>

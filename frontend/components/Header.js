@@ -83,7 +83,7 @@ const Header = () => {
               </Link>
             )}
             {isAuth()&&  isAuth().role === 0 &&(
-            <Link href="/report">
+            <Link href="/allreports">
               <NavLink style={{ cursor: 'pointer' }}>All-Reports</NavLink>
             </Link>
             )}

@@ -16,7 +16,7 @@ const RegisterComponent = () => {
     const { name, email, password, error, loading, message, showForm } = values;
 
     useEffect(() => {
-        isAuth() && Router.push(`/`);
+        isAuth() && Router.push(`/login`);
     }, []);
 
     const submitHandler = e => {

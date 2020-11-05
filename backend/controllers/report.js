@@ -64,22 +64,23 @@ exports.list = (req, res) => {
 };
 
 exports.read = (req, res) => {
-        const reportId = req.params._id;
+        const reportId = req.params.id;
 
-        Report.findOne({ reportId }).exec((err, report) => {
+        Report.findById({ _id: reportId }).exec((err, report) => {
             if (err) {
                 return res.status(400).json({
                     error: errorHandler(err)
                 });
             }
         res.json(report);
+        console.log(report)
     });
 };
 
 exports.remove = (req, res) => {
-    const reportId = req.params._id;
+    const reportId = req.params.id;
 
-    Report.findOneAndRemove({ reportId }).exec((err) => {
+    Report.findByIdAndRemove({_id: reportId }).exec((err) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
